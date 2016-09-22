@@ -10,4 +10,4 @@ COPY resources/reveal.css /usr/lib/node_modules/reveal-md/node_modules/reveal.js
 COPY resources/reveal.html /usr/lib/node_modules/reveal-md/template/
 COPY resources/listing.html /usr/lib/node_modules/reveal-md/template/
 EXPOSE 1948
-ENTRYPOINT ["reveal-md"]
+ENTRYPOINT ["reveal-md", "--theme", "cs"]
