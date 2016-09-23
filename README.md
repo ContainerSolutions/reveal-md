@@ -1,5 +1,6 @@
 ##Reveal-md on Alpine
 
+[![](https://images.microbadger.com/badges/image/containersol/reveal-md.svg)](http://microbadger.com/images/containersol/reveal-md "Get your own image badge on microbadger.com")
 
 A dockerized version of the reveal-md presentation software, running on Alpine Linux. To try it out, just do:
 
