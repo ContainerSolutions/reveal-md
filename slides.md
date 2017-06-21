@@ -7,11 +7,12 @@ revealOptions:
 
 <!-- .slide: data-background="./resources/title-background.svg" -->
 
-Title of the talk - with a subtitle
+# Title of the talk
+## with a subtitle
 
-Conference YYYY #hashtag
+### Conference YYYY #hashtag
 
-John Doe (@JohnDoe)
+#### John Doe (@JohnDoe)
 
 ---
 
