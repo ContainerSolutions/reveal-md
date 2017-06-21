@@ -15,8 +15,6 @@ John Doe (@JohnDoe)
 
 ---
 
-<!-- .slide: data-background="./resources/slide-background.svg" -->
-
 # Bio
 
 * Job Title @ Container Solutions
@@ -24,8 +22,6 @@ John Doe (@JohnDoe)
 * Other things I do
 
 ---
-
-<!-- .slide: data-background="./resources/slide-background.svg" -->
 
 **Agenda**
 
@@ -39,19 +35,13 @@ John Doe (@JohnDoe)
 
 ---
 
-<!-- .slide: data-background="./resources/slide-background.svg" -->
-
 **What is XYZ?**
 
 ---
 
-<!-- .slide: data-background="./resources/slide-background.svg" -->
-
 **Demo**
 
 ---
-
-<!-- .slide: data-background="./resources/slide-background.svg" -->
 
 **Limitations**
 
@@ -63,15 +53,11 @@ John Doe (@JohnDoe)
 
 **Conclusions**
 
-<!-- .slide: data-background="./resources/slide-background.svg" -->
-
 * One
 * Two
 * Three
 
 ---
-
-<!-- .slide: data-background="./resources/slide-background.svg" -->
 
 **Links & Resources**
 
@@ -80,8 +66,6 @@ https://www.example.com
 
 ---
 
-<!-- .slide: data-background="./resources/slide-background.svg" -->
-
 **Keep in touch!**
 
 * Twitter @JohnDoe
@@ -89,12 +73,8 @@ https://www.example.com
 
 ---
 
-<!-- .slide: data-background="./resources/slide-background.svg" -->
-
 **Thank you!**
 
 ---
-
-<!-- .slide: data-background="./resources/slide-background.svg" -->
 
 **Questions?**

@@ -34,6 +34,11 @@ body {
   font-size: 38px;
   font-weight: normal;
   color: #1c98e6;
+  background-image: url('/resources/slide-background.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 ::selection {
