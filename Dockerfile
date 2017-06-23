@@ -11,4 +11,4 @@ COPY resources/reveal.html /usr/lib/node_modules/reveal-md/template/
 COPY resources/listing.html /usr/lib/node_modules/reveal-md/template/
 EXPOSE 1948
 ENTRYPOINT ["reveal-md"]
-CMD ["-w", "--theme", "cs"]
+CMD ["/usr/src/app", "-w", "--theme", "cs"]
