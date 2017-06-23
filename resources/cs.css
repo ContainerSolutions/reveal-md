@@ -21,6 +21,14 @@ section.has-light-background, section.has-light-background h1, section.has-light
   color: white;
 }
 
+a:link {
+    color: #1c98e6;
+}
+
+a:visited {
+    color: #1c98e6;
+}
+
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
@@ -34,7 +42,6 @@ body {
   font-size: 38px;
   font-weight: normal;
   color: #1c98e6;
-  background-image: url('/resources/slide-background.svg');
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
@@ -52,6 +59,14 @@ body {
   font-weight: inherit;
   text-align: left;
   margin-left: 27%;
+}
+
+.reveal > .backgrounds > div {
+  background-image: url('/css/theme/slide-background.svg');
+}
+
+.reveal > .backgrounds > div:first-child {
+  background-image: url('/css/theme/title-background.svg');
 }
 
 .reveal .slides > section > section {

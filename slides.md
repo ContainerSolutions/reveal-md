@@ -5,8 +5,6 @@ revealOptions:
     slideNumber: 'true'
 ---
 
-<!-- .slide: data-background="./resources/title-background.svg" -->
-
 # Title of the talk
 ## with a subtitle
 
