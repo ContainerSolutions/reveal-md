@@ -21,6 +21,14 @@ section.has-light-background, section.has-light-background h1, section.has-light
   color: white;
 }
 
+a:link {
+    color: #1c98e6;
+}
+
+a:visited {
+    color: #1c98e6;
+}
+
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
