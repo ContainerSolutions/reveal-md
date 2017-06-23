@@ -2,7 +2,7 @@
 
 [![](https://images.microbadger.com/badges/image/containersol/reveal-md.svg)](http://microbadger.com/images/containersol/reveal-md "Get your own image badge on microbadger.com")
 
-Reveal-md theme for Container Solutions
+Reveal-md theme for [Container Solutions](http://container-solutions.com)
 
 # Running natively
 
