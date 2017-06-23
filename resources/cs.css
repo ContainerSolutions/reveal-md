@@ -62,11 +62,11 @@ body {
 }
 
 .reveal > .backgrounds > div {
-  background-image: url('/css/theme/slide-background.svg');
+  background-image: url('slide-background.svg');
 }
 
 .reveal > .backgrounds > div:first-child {
-  background-image: url('/css/theme/title-background.svg');
+  background-image: url('title-background.svg');
 }
 
 .reveal .slides > section > section {
