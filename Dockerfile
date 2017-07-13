@@ -1,7 +1,5 @@
 FROM alpine:3.4
 
-RUN mkdir -p /usr/src/app
-
 WORKDIR /usr/src/app
 
 RUN apk update && apk add nodejs
