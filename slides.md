@@ -1,8 +1,5 @@
 ---
 title: Title of the talk - with a subtitle
-revealOptions:
-    transition: 'none'
-    slideNumber: 'true'
 ---
 
 # Title of the talk

@@ -1,7 +1,5 @@
 FROM alpine:3.4
 
-RUN mkdir -p /usr/src/app
-
 WORKDIR /usr/src/app
 
 RUN apk update && apk add nodejs
@@ -17,6 +15,4 @@ COPY resources/listing.html /usr/lib/node_modules/reveal-md/template/
 
 EXPOSE 1948
 
-ENTRYPOINT ["reveal-md"]
-
-CMD ["/usr/src/app", "-w", "--theme", "cs"]
+CMD ["sh", "-c", "reveal-md /usr/src/app -w --theme cs"]
