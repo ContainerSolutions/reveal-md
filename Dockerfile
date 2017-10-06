@@ -10,8 +10,8 @@ COPY resources/cs.png /usr/lib/node_modules/reveal-md/node_modules/reveal.js/css
 COPY resources/slide-background.svg /usr/lib/node_modules/reveal-md/node_modules/reveal.js/css/theme/
 COPY resources/title-background.svg /usr/lib/node_modules/reveal-md/node_modules/reveal.js/css/theme/ 
 COPY resources/cs.css /usr/lib/node_modules/reveal-md/node_modules/reveal.js/css/theme/
-COPY resources/reveal.html /usr/lib/node_modules/reveal-md/template/
-COPY resources/listing.html /usr/lib/node_modules/reveal-md/template/
+COPY resources/reveal.html /usr/lib/node_modules/reveal-md/lib/template/
+COPY resources/listing.html /usr/lib/node_modules/reveal-md/lib/template/
 
 EXPOSE 1948
 
