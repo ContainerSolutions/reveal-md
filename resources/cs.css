@@ -5,7 +5,7 @@
  */
 @import url(../../lib/font/source-sans-pro/source-sans-pro.css);
 section.has-light-background, section.has-light-background h1, section.has-light-background h2, section.has-light-background h3, section.has-light-background h4, section.has-light-background h5, section.has-light-background h6 {
-  color: #000000;
+  color: #242729;
 }
 
 /*********************************************
@@ -22,11 +22,11 @@ section.has-light-background, section.has-light-background h1, section.has-light
 }
 
 a:link {
-    color: #000000;
+    color: #242729;
 }
 
 a:visited {
-    color: #000000;
+    color: #242729;
 }
 
 /*********************************************
@@ -41,7 +41,7 @@ body {
   font-family: "Open Sans", Helvetica, sans-serif;
   font-size: 38px;
   font-weight: normal;
-  color: #000000;
+  color: #242729;
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
