@@ -4,15 +4,10 @@ WORKDIR /usr/src/app
 
 RUN apk update && apk add nodejs
 RUN npm install -g reveal-md
-RUN mkdir -p /usr/lib/node_modules/reveal-md/node_modules/reveal.js/images
 
-COPY resources/cs.png /usr/lib/node_modules/reveal-md/node_modules/reveal.js/css/theme 
-COPY resources/slide-background.svg /usr/lib/node_modules/reveal-md/node_modules/reveal.js/css/theme/
-COPY resources/title-background.svg /usr/lib/node_modules/reveal-md/node_modules/reveal.js/css/theme/ 
-COPY resources/cs.css /usr/lib/node_modules/reveal-md/node_modules/reveal.js/css/theme/
-COPY resources/reveal.html /usr/lib/node_modules/reveal-md/lib/template/
-COPY resources/listing.html /usr/lib/node_modules/reveal-md/lib/template/
+RUN mkdir /usr/src/app/theme
+COPY resources/* /usr/src/app/css
 
 EXPOSE 1948
 
-CMD ["sh", "-c", "reveal-md /usr/src/app -w --theme cs"]
+CMD ["sh", "-c", "reveal-md -w --css css/cs.css slides.md"]

@@ -14,7 +14,7 @@ reveal-md --css resources/cs.css slides.md
 # Running with Docker
 
 ```
-docker run -d -p 8000:1948 -v /path/to/my/slides.md:/usr/src/app/slides.md containersol/reveal-md`
+docker run -d -p 8000:1948 -v $PWD/slides.md:/usr/src/app/slides.md containersol/reveal-md
 ```
 ---
 
