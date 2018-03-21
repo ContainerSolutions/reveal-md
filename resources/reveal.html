@@ -22,7 +22,17 @@
     <body>
 
         <div class="reveal">
-            <div class="slides">{{{slides}}}</div>
+            <div class="slides">
+              <section class="front-slide">
+                <section>
+                  <h1>{{title}}</h2>
+                  <h2>{{subtitle}}</h2>
+                  <h3>{{authors}}</h3>
+                  <h3>email: {{email}}</h3>
+                </section>
+              </section>
+              {{{slides}}}
+            </div>
         </div>
 
         <script src="{{{base}}}/lib/js/head.min.js"></script>

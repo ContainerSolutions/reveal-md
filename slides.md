@@ -1,14 +1,9 @@
 ---
-title: Title of the talk - with a subtitle
----
-
-# Title of the talk
-## with a subtitle
-
-### Conference YYYY #hashtag
-
-#### John Doe (@JohnDoe)
-
+title: Title of the talk
+hideFirstSlide: true
+subtitle: subtitle
+authors: Loredana & Maarten
+email: "maarten@moretea.nl"
 ---
 
 # Bio

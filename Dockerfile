@@ -2,8 +2,10 @@ FROM alpine:3.4
 
 WORKDIR /usr/src/app
 
-RUN apk update && apk add nodejs
+RUN apk update && apk add nodejs git
 RUN npm install -g reveal-md
+RUN npm install -g webpro/reveal-md#2.0.0-rc.2
+
 RUN mkdir -p /usr/lib/node_modules/reveal-md/node_modules/reveal.js/images
 
 COPY resources/cs.png /usr/lib/node_modules/reveal-md/node_modules/reveal.js/css/theme 
