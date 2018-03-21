@@ -13,9 +13,17 @@ reveal-md --css resources/cs.css slides.md
 
 # Running with Docker
 
-```
-docker run -d -p 8000:1948 -v /path/to/my/slides.md:/usr/src/app/slides.md containersol/reveal-md`
-```
+- **Step 1** Build with docker:
+   ```
+   docker build -t containersol/reveal-md .
+
+   ```
+
+- **Step 2** Run with docker:
+   ```
+   docker run --rm -ti -p 8000:1948 -v `pwd`/resources:/usr/src/app/slides.md containersol/reveal-md
+   ```
+
 ---
 
 You can use the the test slides to get an idea for the formatting.
