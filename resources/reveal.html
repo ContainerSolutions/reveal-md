@@ -1,91 +1,374 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>{{{title}}}</title>
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-        <link rel="stylesheet" href="{{{base}}}/css/reveal.css">
-        <link rel="stylesheet" href="{{{themeUrl}}}" id="theme">
-        <link rel="stylesheet" href="{{{highlightThemeUrl}}}">
-        <link rel="stylesheet" href="{{{base}}}/css/print/{{#print}}pdf{{/print}}{{^print}}paper{{/print}}.css" type="text/css" media="print">
-        {{#cssPaths}}
-          <link rel="stylesheet" href="{{{base}}}/{{{.}}}">
-        {{/cssPaths}}
+<head>
+    <meta charset="utf-8">
+    <title>{{{title}}}</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="{{{base}}}/css/reveal.css">
+    <link rel="stylesheet" href="{{{themeUrl}}}" id="theme">
+    <link rel="stylesheet" href="{{{highlightThemeUrl}}}">
+    <!-- <link rel="stylesheet" href="{{{base}}}/css/print/{{#print}}pdf{{/print}}{{^print}}paper{{/print}}.css" type="text/css" media="print"> -->
+    {{#cssPaths}}
+    <link rel="stylesheet" href="{{{base}}}/{{{.}}}">
+    {{/cssPaths}}
 
-        {{#watch}}
-		<script>
-		  document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
-		  ':35729/livereload.js?snipver=1"></' + 'script>')
-		</script>
-        {{/watch}}
-    </head>
-    <body>
+    {{#watch}}
+    <script>
+        document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+            ':35729/livereload.js?snipver=1"></' + 'script>')
+    </script>
+    {{/watch}}
 
-        <div class="reveal">
-            <div class="slides">
-              <section class="front-slide">
-                <section>
-                  <h1>{{title}}</h2>
-                  <h2>{{subtitle}}</h2>
-                  <h3>{{authors}}</h3>
-                  <h3>email: {{email}}</h3>
-                </section>
-              </section>
-              {{{slides}}}
-            </div>
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? '{{base}}/css/print/pdf.css' : '{{base}}/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+
+<div class="reveal">
+
+
+    <div class="slides">
+        <div id="left-col" class="col-left" style="display: none;">
+            <h2>{{subtitle}}</h2>
+            <h4>{{date}}</h4>
+            <h3>{{authors}}</h3>
+            <h4>{{job-title}}</h4>
+            <p>{{email}}</p>
+            <p>{{twitter}}</p>
         </div>
+        {{{slides}}}
+    </div>
+</div>
 
-        <script src="{{{base}}}/lib/js/head.min.js"></script>
-        <script src="{{{base}}}/js/reveal.js"></script>
+<script src="{{{base}}}/lib/js/head.min.js"></script>
+<script src="{{{base}}}/js/reveal.js"></script>
 
-        <script>
-            function extend() {
-              var target = {};
-              for (var i = 0; i < arguments.length; i++) {
-                var source = arguments[i];
-                for (var key in source) {
-                  if (source.hasOwnProperty(key)) {
+
+<script>
+    function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+            var source = arguments[i];
+            for (var key in source) {
+                if (source.hasOwnProperty(key)) {
                     target[key] = source[key];
-                  }
                 }
-              }
-              return target;
+            }
+        }
+        return target;
+    }
+
+    // Optional libraries used to extend on reveal.js
+    var deps = [
+        {
+            src: '{{{base}}}/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+        },
+        {
+            src: '{{{base}}}/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+        },
+        {
+            src: '{{{base}}}/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+        },
+        {
+            src: '{{{base}}}/plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+        },
+        {src: '{{{base}}}/plugin/zoom-js/zoom.js', async: true},
+        {src: '{{{base}}}/plugin/notes/notes.js', async: true},
+        {src: '{{{base}}}/plugin/math/math.js', async: true}
+    ];
+
+    // default options to init reveal.js
+    var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        dependencies: deps,
+        display: 'block',
+        markdown: {
+            smartypants: true
+        }
+    };
+
+    // options from URL query string
+    var queryOptions = Reveal.getQueryHash() || {};
+
+    var options = {{{revealOptionsStr}}};
+    var showTitlePage = '{{{showLeftCol}}}' == 'true';
+    var showFooterText = '{{{showFooterText}}}' == 'true';
+    var hideFirstStyle = '{{{hideFirstStyle}}}' == 'true';
+    options = extend(defaultOptions, options, queryOptions);
+</script>
+
+{{#scriptPaths}}
+<script src="{{{base}}}/{{{.}}}"></script>
+{{/scriptPaths}}
+
+<script>
+
+    //initializing function
+    Reveal.initialize(options);
+    Reveal.addEventListener('ready', function () {
+        toggleFirstSlide(Reveal.isFirstSlide());
+        var footer = document.getElementById('footer').innerHTML;
+
+        checkElement('.present') //use whichever selector you want
+            .then(zoomOut);
+        if (window.location.search.match(/print-pdf/gi)) {
+            Reveal.addEventListener('ready', function (event) {
+                document.getElementsByClassName('slide-background').innerHTML += footer;
+            });
+        }
+        else {
+            document.querySelectorAll('div.reveal').innerHTML += footer;
+        }
+    });
+    Reveal.addEventListener('slidechanged', function () {
+        toggleFirstSlide(Reveal.isFirstSlide());
+
+        checkElement('.present') //use whichever selector you want
+            .then(zoomOut);
+
+    });
+    Reveal.addEventListener('ready', function () {
+        var sectionContents = document.querySelectorAll('[data-markdown]');
+
+        for (var i = 0; i < sectionContents.length; i++) {
+            org_html = sectionContents[i].innerHTML;
+            new_html = "<div id='WrapInner'>" + org_html + "</div>";
+            sectionContents[i].innerHTML = new_html;
+        }
+    });
+    if (showFooterText) {
+        if (window.location.search.match(/print-pdf/gi)) {
+            Reveal.addEventListener('ready', function (event) {
+                var printFooter = document.querySelectorAll('.slide-background');
+                for (var i = 0; i < printFooter.length; i++) {
+                    var footer = createFooter();
+                    printFooter[i].appendChild(footer);
+                }
+            });
+        }
+        else {
+            var footer = createFooter();
+            document.querySelector('div.slides').appendChild(footer);
+        }
+    }
+
+    //async function
+    function rafAsync() {
+        return new Promise(function (resolve) {
+            requestAnimationFrame(resolve);
+        });
+    }
+
+    function checkElement(selector) {
+        if (document.querySelector(selector) === null) {
+            return rafAsync().then(function () {
+                return checkElement(selector);
+            });
+        } else {
+            return Promise.resolve(true);
+        }
+    }
+
+    var windowWidth = window.innerWidth
+        || document.documentElement.clientWidth
+        || document.body.clientWidth;
+
+    function getZoom() {
+        var parentElement = document.getElementsByClassName('slides')[0];
+        var scale = window.getComputedStyle(document.getElementsByClassName('slides')[0]).zoom;
+
+        if (scale != null) {
+            var zoomEffect = matrixToArray(scale);
+
+            function matrixToArray(str) {
+                return str.match(/(-?[0-9\.]+)/g);
             }
 
-            // Optional libraries used to extend on reveal.js
-            var deps = [
-              { src: '{{{base}}}/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-              { src: '{{{base}}}/plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
-              { src: '{{{base}}}/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
-              { src: '{{{base}}}/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-              { src: '{{{base}}}/plugin/zoom-js/zoom.js', async: true },
-              { src: '{{{base}}}/plugin/notes/notes.js', async: true },
-              { src: '{{{base}}}/plugin/math/math.js', async: true }
-            ];
+        } else {
+            scale = window.getComputedStyle(document.getElementsByClassName('slides')[0]).transform;
+            var zoomEffect = matrixToArray(scale)[3];
 
-            // default options to init reveal.js
-            var defaultOptions = {
-              controls: true,
-              progress: true,
-              history: true,
-              center: true,
-              transition: 'default', // none/fade/slide/convex/concave/zoom
-              dependencies: deps
-            };
+            function matrixToArray(str) {
+                return str.match(/(-?[0-9\.]+)/g);
+            }
+        }
+        return {parentElement, scale, zoomEffect, zoomEffect};
+    }
 
-            // options from URL query string
-            var queryOptions = Reveal.getQueryHash() || {};
+    function toggleFirstSlide(isFirstSlide) {
+        function rafAsync() {
+            return new Promise(function (resolve) {
+                requestAnimationFrame(resolve); //faster than set time out
+            });
+        }
 
-            var options = {{{revealOptionsStr}}};
-            options = extend(defaultOptions, options, queryOptions);
-        </script>
+        function checkElement(selector) {
+            if (document.querySelector(selector) === null) {
+                return rafAsync().then(function () {
+                    return checkElement(selector);
+                });
+            } else {
+                return Promise.resolve(true);
+            }
+        }
 
-        {{#scriptPaths}}
-          <script src="{{{base}}}/{{{.}}}"></script>
-        {{/scriptPaths}}
+        if (showTitlePage) {
+            var {parentElement, scale, zoomEffect, zoomEffect} = getZoom();
+            if (isFirstSlide) {
+                document.getElementById('left-col').style.display = "block";
+                document.getElementsByClassName('slides')[0].classList.add('firstOfSlides');
 
-        <script>
-            Reveal.initialize(options);
-        </script>
-    </body>
+                checkElement('.first-slide') //use whichever selector you want
+                    .then(function () {
+
+                        var middleSection = Math.ceil(document.getElementsByClassName('slides')[0].clientWidth * zoomEffect);
+                        var windowWidth = window.innerWidth
+                            || document.documentElement.clientWidth
+                            || document.body.clientWidth;
+                        document.getElementById('left-col').style.width = Math.ceil((windowWidth - middleSection) / zoomEffect) + 'px';
+
+                        var colLeftWidth = document.getElementById('left-col').clientWidth;
+                        if (scale == window.getComputedStyle(document.getElementsByClassName('slides')[0]).zoom) {
+                            parentElement.style.marginLeft = colLeftWidth + 'px';
+                            console.log('parent margin left: ' + parentElement.style.marginLeft);
+                        }
+                        document.getElementById('left-col').style.marginLeft = '-' + Math.ceil((windowWidth - middleSection) / zoomEffect) + 'px';
+
+                        console.log(true);
+                        console.log('zoom: ' + zoomEffect);
+                        console.log("left column width: " + colLeftWidth);
+                        console.log('margin left of column:' + ('-' + Math.ceil(windowWidth - middleSection) + 'px'));
+                        console.log("middle slide width:" + middleSection);
+                        console.log("middle slide width:" + windowWidth);
+                    });
+
+
+            } else {
+                document.getElementById('left-col').style.display = "none";
+                document.getElementById('left-col').style.width = "0";
+                document.getElementById('left-col').style.marginLeft = "0";
+                var parentElement = document.getElementsByClassName('slides')[0];
+                parentElement.style.marginLeft = "auto";
+
+                var fillLeftWidth = document.getElementsByClassName('slides')[0].offsetLeft;
+
+                document.getElementById('footer').style.width = (windowWidth / zoomEffect) + 'px';
+                document.getElementById('footer').style.marginLeft = "-" + fillLeftWidth + 'px';
+
+                checkElement('.first-slide') //use whichever selector you want
+                    .then(function () {
+
+                        document.getElementsByClassName('slides')[0].classList.remove('firstOfSlides');
+                        var parentElement = document.getElementsByClassName('slides')[0];
+                        parentElement.style.marginLeft = 'auto';
+                        console.log(checkElement('.firstOfSlides'));
+
+                    });
+            }
+
+
+            if (isFirstSlide) {
+                document.getElementsByClassName('reveal')[0].classList.add('first-slide');
+                document.getElementsByClassName('backgrounds')[0].classList.add('first-slide');
+
+
+                if (hideFirstStyle) {
+                    document.getElementsByClassName('reveal')[0].classList.remove('first-slide');
+                    document.getElementsByClassName('backgrounds')[0].classList.remove('first-slide');
+                }
+                if (window.location.search.match(/print-pdf/gi)) {
+                    document.getElementById('left-col').style.display = "none";
+                }
+
+
+            } else {
+                document.getElementsByClassName('reveal')[0].classList.remove('first-slide');
+                document.getElementsByClassName('backgrounds')[0].classList.remove('first-slide');
+
+
+            }
+        }
+
+    }
+
+
+    <!--     Left column  -->
+
+
+    <!--    Footer    -->
+
+
+    function createFooter() {
+        var footer = document.createElement('div');
+        footer.className = 'hidden';
+        footer.innerHTML =
+            '<div id="footer">\n' +
+            '        <div id="footer-left"> <p>container-solutions.com</p><p>{{email}}</p></div>\n' +
+            '        <div id="footer-right"> <p class="title">{{title}}</p> <p>{{{twitter}}}</p></div>\n' +
+            '    </div>';
+        return footer;
+    }
+
+    <!--   / Footer    -->
+
+
+
+    function zoomOut() {
+
+        var childSizing = document.querySelectorAll('.present[data-markdown] #WrapInner')[0];
+        if (childSizing === null) {
+            return;
+        }
+        var refHeight = childSizing.clientHeight;
+        var refWidth = childSizing.clientWidth;
+        console.log(refHeight + ' height and width ' + refWidth);
+
+        var footer = document.getElementById('footer');
+        var footerHeight = footer.clientHeight;
+
+        var parentSizing = document.getElementsByClassName('slides')[0];
+        var parentHeight = parentSizing.clientHeight - footerHeight;
+        var parentWidth = parentSizing.clientWidth;
+
+
+        var scale = Math.min(
+            parentWidth / refWidth,
+            parentHeight / refHeight
+        );
+
+        var translateY = Math.min((parentHeight - refHeight) / 2);
+        if (parentHeight < refHeight) {
+            childSizing.style.transform = "translateY(" + translateY + "px) scale(" + scale + ")";
+            console.log('it is bigger man')
+
+        }
+
+    }
+
+
+</script>
+
+
+</body>
 </html>
+
+
+
+
