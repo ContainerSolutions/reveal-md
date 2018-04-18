@@ -33,15 +33,24 @@
 
 
     <div class="slides">
-        <div id="left-col" class="col-left" style="display: none;">
+        <div id="left-col" class="col-left">
+            <div id="left-inner" style="display: none;">
             <h2>{{subtitle}}</h2>
             <h4>{{date}}</h4>
             <h3>{{authors}}</h3>
             <h4>{{job-title}}</h4>
             <p>{{email}}</p>
-            <p>{{twitter}}</p>
+            <h4>{{twitter}}</h4>
+            </div>
+            <div class="logo-image">
+                <img src="{{base}}/css/theme/logo.svg" class="logo"/>
+                <h4>info@container-solutions.com</h4>
+                <h4>www.container-solutions.com</h4>
+            </div>
         </div>
         {{{slides}}}
+        <!--<div id="footer-container"><div id="footer"></div></div>-->
+
     </div>
 </div>
 
@@ -124,7 +133,7 @@
     Reveal.initialize(options);
     Reveal.addEventListener('ready', function () {
         toggleFirstSlide(Reveal.isFirstSlide());
-        var footer = document.getElementById('footer').innerHTML;
+
 
         checkElement('.present') //use whichever selector you want
             .then(zoomOut);
@@ -153,13 +162,12 @@
             sectionContents[i].innerHTML = new_html;
         }
     });
-    if (showFooterText) {
+
         if (window.location.search.match(/print-pdf/gi)) {
             Reveal.addEventListener('ready', function (event) {
                 var printFooter = document.querySelectorAll('.slide-background');
                 for (var i = 0; i < printFooter.length; i++) {
-                    var footer = createFooter();
-                    printFooter[i].appendChild(footer);
+                    printFooter[i].appendChild(createFooter());
                 }
             });
         }
@@ -167,7 +175,7 @@
             var footer = createFooter();
             document.querySelector('div.slides').appendChild(footer);
         }
-    }
+
 
     //async function
     function rafAsync() {
@@ -228,15 +236,34 @@
                 return Promise.resolve(true);
             }
         }
+        //
+        checkElement('#footer') //use whichever selector you want
+            .then(function () {
 
-        if (showTitlePage) {
+                if(showFooterText) {
+                    document.getElementById('footer-left').style.display="flex";
+                    document.getElementById('footer-right').style.display="flex";
+                }
+
+            });
+        checkElement('.first-slide') //use whichever selector you want
+            .then(function () {
+                if (showTitlePage) {
+                    document.getElementById('left-inner').style.display = "block";
+                }
+            });
+
             var {parentElement, scale, zoomEffect, zoomEffect} = getZoom();
             if (isFirstSlide) {
                 document.getElementById('left-col').style.display = "block";
                 document.getElementsByClassName('slides')[0].classList.add('firstOfSlides');
-
                 checkElement('.first-slide') //use whichever selector you want
                     .then(function () {
+                        if (window.location.search.match(/print-pdf/gi)) {
+                            document.getElementById('footer').style.display='block';
+                        }else{
+                            document.getElementById('footer').style.display='none';
+                        }
 
                         var middleSection = Math.ceil(document.getElementsByClassName('slides')[0].clientWidth * zoomEffect);
                         var windowWidth = window.innerWidth
@@ -245,12 +272,11 @@
                         document.getElementById('left-col').style.width = Math.ceil((windowWidth - middleSection) / zoomEffect) + 'px';
 
                         var colLeftWidth = document.getElementById('left-col').clientWidth;
-                        if (scale == window.getComputedStyle(document.getElementsByClassName('slides')[0]).zoom) {
+                        if (scale === window.getComputedStyle(document.getElementsByClassName('slides')[0]).zoom) {
                             parentElement.style.marginLeft = colLeftWidth + 'px';
                             console.log('parent margin left: ' + parentElement.style.marginLeft);
                         }
                         document.getElementById('left-col').style.marginLeft = '-' + Math.ceil((windowWidth - middleSection) / zoomEffect) + 'px';
-
                         console.log(true);
                         console.log('zoom: ' + zoomEffect);
                         console.log("left column width: " + colLeftWidth);
@@ -261,6 +287,7 @@
 
 
             } else {
+                document.getElementById('footer').style.display='block';
                 document.getElementById('left-col').style.display = "none";
                 document.getElementById('left-col').style.width = "0";
                 document.getElementById('left-col').style.marginLeft = "0";
@@ -304,7 +331,6 @@
 
 
             }
-        }
 
     }
 
@@ -315,20 +341,26 @@
     <!--    Footer    -->
 
 
+    // function createFooter() {
+    //     var footer = document.getElementById('footer');
+    //     footer.innerHTML =
+    //         '        <div id="footer-left"> <p>container-solutions.com</p><p>{{email}}</p></div>\n' +
+    //         '        <div id="footer-right"> <p class="title">{{title}}</p> <p>{{{twitter}}}</p></div>\n' ;
+    //     return footer;
+    // }
+    <!--   / Footer    -->
+
     function createFooter() {
         var footer = document.createElement('div');
         footer.className = 'hidden';
         footer.innerHTML =
             '<div id="footer">\n' +
-            '        <div id="footer-left"> <p>container-solutions.com</p><p>{{email}}</p></div>\n' +
-            '        <div id="footer-right"> <p class="title">{{title}}</p> <p>{{{twitter}}}</p></div>\n' +
-            '    </div>';
+            '<div id="footer-left" style="display:none"><p>container-solutions.com</p><p>{{email}}</p></div>\n' +
+            '<div id="footer-right" style="display:none"><p class="title">{{title}}</p> <p>{{{twitter}}}</p></div>\n' +
+            '</div>';
         return footer;
     }
-
     <!--   / Footer    -->
-
-
 
     function zoomOut() {
 
@@ -353,13 +385,26 @@
             parentHeight / refHeight
         );
 
+
         var translateY = Math.min((parentHeight - refHeight) / 2);
         if (parentHeight < refHeight) {
-            childSizing.style.transform = "translateY(" + translateY + "px) scale(" + scale + ")";
-            console.log('it is bigger man')
+            if (window.location.search.match(/print-pdf/gi)) {
+                childSizing.style.transform = "unset";
+            }
+            else {
+                childSizing.style.transform = "translateY(" + translateY + "px) scale(" + scale + ")";
+                console.log('it is bigger man')
 
+            }
         }
 
+    }
+
+    //target firefox
+
+
+    if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
+        // Do Firefox-related activities
     }
 
 

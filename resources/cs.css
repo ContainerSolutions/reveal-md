@@ -3,7 +3,7 @@
  *
  * By Hakim El Hattab, http://hakim.se
  */
-@import url(../../lib/font/source-sans-pro/source-sans-pro.css);
+/*@import url(../../lib/font/source-sans-pro/source-sans-pro.css);*/
 
 section.has-light-background, section.has-light-background h1, section.has-light-background h2, section.has-light-background h3, section.has-light-background h4, section.has-light-background h5, section.has-light-background h6 {
     color: #242729;
@@ -73,36 +73,37 @@ body {
 }
 
 .reveal .col-left h2 {
-    font-size: 1.5rem;
+    font-size: 1.5em;
     margin-bottom: 30px;
     line-height: 1.2;
 }
 
 .reveal .col-left h3 {
-    font-size: 0.875rem;
+    font-size: 1.575em;
     margin-bottom: 10px;
 }
 
 .reveal .col-left h4 {
-    font-size: 0.625rem;
+    font-size: 0.925em;
     margin-bottom: 10px;
 }
 .reveal .col-left p {
-    font-size: 0.525rem;
+    font-size: 0.725em;
     margin-top:0;
 }
 
 
 .reveal > .backgrounds {
-    background: url('slide-background.svg') no-repeat bottom center;
-    background-size: cover;
+    background: url('footer_pattern.svg') fixed repeat-x bottom center;
+    background-size: contain;
 }
 
 .reveal > .backgrounds.first-slide {
-    background: url('title-background.svg') fixed no-repeat left center;
-    transition: none;
+    background: url('pattern.svg') fixed repeat-y left center;
+  background-size: contain;
 
 }
+
 
 
 
@@ -430,14 +431,16 @@ color: #42affa;
  /** FOOTER*/
  /**********************************************!*/
 .reveal #footer {
-    background: rgba(85, 63, 93, 0.7);
-    height: 6rem;
+    background: url('footer_blue_pattern_logo.svg') fixed repeat-x bottom center;
+    background-size: contain;
+    height: 2.6em;
     position: absolute;
-    bottom: -3.4rem;
+    bottom: -1.5em;
     width: 100%;
     z-index: 1;
     display: flex;
     align-items: center;
+    justify-content: center;
 
 }
 
@@ -448,6 +451,7 @@ color: #42affa;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin-top: 0.1em;
 }
 .reveal #footer-left {
     position: absolute;
@@ -457,6 +461,7 @@ color: #42affa;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin-top: 0.1em;
 }
 .reveal #footer-right p,
 .reveal #footer-left p{
@@ -475,8 +480,8 @@ color: #42affa;
 }
 
 .reveal.first-slide  #left-col {
-    background: rgba(48, 123, 112, 0.7);
-    background-size: cover;
+    background: url('side_blue_pattern.svg') fixed repeat-y left center;
+    background-size: contain;
     text-align: left;
     padding: 10% 5% 0 5%;
     box-sizing: border-box;
@@ -486,14 +491,13 @@ color: #42affa;
 
 
 }
-.reveal.first-slide .slides {
-    background: rebeccapurple
-}
+/*.reveal.first-slide .slides {*/
+   /**/
+/*}*/
 
 .reveal.first-slide .slides section[data-markdown] {
     box-sizing:border-box;
     padding:0;
-    background:mistyrose;
 }
 .reveal .slides > section {
     margin: 0 auto;
@@ -507,7 +511,6 @@ color: #42affa;
 
 
 #WrapInner{
-    background:pink;
     display:block;
     -webkit-box-sizing: border-box /* Safari/Chrome, other WebKit */;
     -moz-box-sizing: border-box /* Firefox, other Gecko */;
@@ -519,4 +522,694 @@ color: #42affa;
 
 
 
+.reveal ul li {
+    line-height:1.5;
+}
+
+
+.reveal .slide-background.present {
+    height: 95vh;
+}
+
+.listing{
+    background:#2841f9 url('pattern.svg') fixed repeat left center;
+}
+.listing a {
+    text-decoration: none;
+    color:#333333;
+
+}
+.listing a:hover{
+    text-decoration: none;
+    color:#2841f9;
+}
+.listing .list-container{
+    background: url('pattern.svg') fixed repeat left center;
+    padding: 20px 10px;
+    background: #fff;
+    position: relative;
+    border: 1px solid #e7e7e8;
+    -webkit-box-shadow: 0px 0px 70px 0px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 0px 70px 0px rgba(0,0,0,0.15);
+    box-shadow: 0px 0px 70px 0px rgba(0,0,0,0.15);
+    max-width: 33%;
+}
+
+.list {
+    list-style-type: none;
+    position: relative;
+    border-left: 1px dashed #1DD5B2;
+    padding-left: 30px;
+    margin-left: 30px;
+}
+
+.listing a:before {
+    content: "";
+    display: block;
+    width: 9px;
+    height: 9px;
+    position: absolute;
+    left: -8px;
+    background: #fff;
+    border: 2px solid #1DD5B2;
+    transition: all 0.3s;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    z-index: 9;
+    margin-top: 5px;
+}
+.listing a:hover:before {
+    background: #1DD5B2;
+}
+
+/*.logo-image {*/
+    /*background:*/
+/*}*/
+.reveal .logo-image {
+    position: absolute; bottom: 3%;
+}
+.reveal .logo {
+    margin: 5% 0;
+    max-width: 95%;
+}
+
+
+
+/**
+ * Black theme for reveal.js. This is the opposite of the 'white' theme.
+ *
+ * By Hakim El Hattab, http://hakim.se
+ */
+/*@import url(../../lib/font/source-sans-pro/source-sans-pro.css);*/
+
+section.has-light-background, section.has-light-background h1, section.has-light-background h2, section.has-light-background h3, section.has-light-background h4, section.has-light-background h5, section.has-light-background h6 {
+    color: #242729;
+}
+
+
+
+
+
+/*********************************************
+* CS STYLES
+*********************************************/
+.reveal .footer {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    background: #3197d4;
+    font-size: 0.5em;
+    color: white;
+}
+
+a:link {
+    color: #242729;
+}
+
+a:visited {
+    color: #242729;
+}
+
+/*********************************************
+ * GLOBAL STYLES
+ *********************************************/
+body {
+    background: white;
+
+}
+
+.reveal {
+    font-family: "Open Sans", Helvetica, sans-serif;
+    font-size: 1.375rem;
+    font-weight: normal;
+    color: #242729;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+::selection {
+    color: #fff;
+    background: #134674;
+    text-shadow: none;
+}
+
+
+
+
+.reveal .col-right {
+    display: block;
+}
+
+.reveal .col-left h1, .reveal .col-left h2, .reveal .col-left h3, .reveal .col-left h4, .reveal .col-left h5, .reveal .col-left h6, .reveal .col-left p {
+    color: #fff;
+    text-align: left;
+    line-height: 1;
+}
+
+.reveal .col-left h2 {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+    line-height: 1.2;
+}
+
+.reveal .col-left h3 {
+    font-size: 1.575em;
+    margin-bottom: 10px;
+}
+
+.reveal .col-left h4 {
+    font-size: 0.925em;
+    margin-bottom: 10px;
+}
+.reveal .col-left p {
+    font-size: 0.725em;
+    margin-top:0;
+}
+
+
+.reveal > .backgrounds {
+    background: url('footer_pattern.svg') fixed repeat-x bottom center;
+    background-size: contain;
+}
+
+.reveal > .backgrounds.first-slide {
+    background: url('pattern.svg') fixed repeat-y left center;
+    background-size: contain;
+
+}
+
+
+
+
+.reveal .slides > section > section {
+    line-height: 1.3;
+    font-weight: inherit;
+    text-align: left;
+}
+
+/*********************************************
+ * HEADERS
+ *********************************************/
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+    margin: 0 0 20px 0;
+    color: #2841f9;
+    font-family: "Open Sans", Helvetica, sans-serif;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: center;
+    /* text-transform: uppercase; */
+    text-shadow: none;
+    word-wrap: break-word;
+}
+
+.reveal h1 {
+    font-size: 2.5em;
+}
+
+.reveal h2 {
+    font-size: 1.6em;
+}
+
+.reveal h3 {
+    font-size: 1.3em;
+}
+
+.reveal h4 {
+    font-size: 1em;
+}
+
+
+.reveal h1 {
+    text-shadow: none;
+}
+
+/*********************************************
+ * OTHER
+ *********************************************/
+.reveal p {
+    margin: 20px 0;
+    line-height: 1.3;
+}
+
+/* Ensure certain elements are never larger than the slide itself */
+.reveal img,
+.reveal video,
+.reveal iframe {
+    max-width: 95%;
+    max-height: 95%;
+}
+
+.reveal strong,
+.reveal b {
+    font-weight: bold;
+}
+
+.reveal em {
+    font-style: italic;
+}
+
+.reveal ol,
+.reveal dl,
+.reveal ul {
+    display: inline-block;
+    text-align: left;
+    margin: 0 0 0 1em;
+}
+
+.reveal ol {
+    list-style-type: decimal;
+}
+
+.reveal ul {
+    list-style-type: disc;
+}
+
+.reveal ul ul {
+    list-style-type: square;
+}
+
+.reveal ul ul ul {
+    list-style-type: circle;
+}
+
+.reveal ul ul,
+.reveal ul ol,
+.reveal ol ol,
+.reveal ol ul {
+    display: block;
+    margin-left: 40px;
+}
+
+.reveal dt {
+    font-weight: bold;
+}
+
+.reveal dd {
+    margin-left: 40px;
+}
+
+.reveal q,
+.reveal blockquote {
+    quotes: none;
+}
+
+.reveal blockquote {
+    display: block;
+    position: relative;
+    width: 70%;
+    margin: 20px auto;
+    padding: 5px;
+    font-style: italic;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+}
+
+.reveal blockquote p:first-child,
+.reveal blockquote p:last-child {
+    display: inline-block;
+}
+
+.reveal q {
+    font-style: italic;
+}
+
+.reveal pre {
+    display: block;
+    position: relative;
+    width: 90%;
+    margin: 20px auto;
+    text-align: left;
+    font-size: 0.55rem;
+    font-family: monospace;
+    line-height: 1.2em;
+    word-wrap: break-word;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+}
+
+.reveal code {
+    font-family: monospace;
+}
+
+.reveal pre code {
+    display: block;
+    padding: 25px 5px;
+    max-height: 400px;
+    word-wrap: normal;
+    overflow: scroll;
+    font-size: 1.8em;
+    line-height: 1;
+}
+
+
+.reveal table {
+    margin: auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.reveal table th {
+    font-weight: bold;
+}
+
+.reveal table th,
+.reveal table td {
+    text-align: left;
+    padding: 0.2em 0.5em 0.2em 0.5em;
+    border-bottom: 1px solid;
+}
+
+.reveal table th[align="center"],
+.reveal table td[align="center"] {
+    text-align: center;
+}
+
+.reveal table th[align="right"],
+.reveal table td[align="right"] {
+    text-align: right;
+}
+
+.reveal table tbody tr:last-child th,
+.reveal table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.reveal sup {
+    vertical-align: super;
+}
+
+.reveal sub {
+    vertical-align: sub;
+}
+
+.reveal small {
+    display: inline-block;
+    font-size: 0.6rem;
+    line-height: 1.2rem;
+    vertical-align: top;
+}
+
+.reveal small * {
+    vertical-align: top;
+}
+
+
+
+/*********************************************
+ * LINKS
+ *********************************************/
+.reveal a {
+    color: #42affa;
+    text-decoration: none;
+    -webkit-transition: color .15s ease;
+    -moz-transition: color .15s ease;
+    transition: color .15s ease;
+}
+
+.reveal a:hover {
+    color: #8dcffc;
+    text-shadow: none;
+    border: none;
+}
+
+.reveal .roll span:after {
+    color: #fff;
+    background: #068de9;
+}
+
+/*********************************************
+ * IMAGES
+ *********************************************/
+
+.reveal section img.plain {
+    border: 0;
+    box-shadow: none;
+}
+
+.reveal a img {
+    -webkit-transition: all .15s linear;
+    -moz-transition: all .15s linear;
+    transition: all .15s linear;
+}
+
+.reveal a:hover img {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #42affa;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
+}
+
+/*********************************************
+ * NAVIGATION CONTROLS
+ *********************************************/
+.reveal .controls {
+    color: #42affa;
+}
+
+.reveal .controls .navigate-left,
+.reveal .controls .navigate-left.enabled {
+    border-right-color: #42affa;
+}
+
+.reveal .controls .navigate-right,
+.reveal .controls .navigate-right.enabled {
+    border-left-color: #42affa;
+}
+
+.reveal .controls .navigate-up,
+.reveal .controls .navigate-up.enabled {
+    border-bottom-color: #42affa;
+}
+
+.reveal .controls .navigate-down,
+.reveal .controls .navigate-down.enabled {
+    border-top-color: #42affa;
+}
+
+.reveal .controls .navigate-left.enabled:hover {
+    border-right-color: #8dcffc;
+}
+
+.reveal .controls .navigate-right.enabled:hover {
+    border-left-color: #8dcffc;
+}
+
+.reveal .controls .navigate-up.enabled:hover {
+    border-bottom-color: #8dcffc;
+}
+
+.reveal .controls .navigate-down.enabled:hover {
+    border-top-color: #8dcffc;
+}
+
+/*********************************************
+ * PROGRESS BAR
+ *********************************************/
+.reveal .progress {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.reveal .progress span {
+    background: #42affa;
+    -webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+    -moz-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+    transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+}
+
+
+/*!**********************************************/
+/** FOOTER*/
+/**********************************************!*/
+.reveal #footer {
+    background: url('footer_blue_pattern_logo.svg') fixed repeat-x bottom center;
+    background-size: contain;
+    height: 2.6em;
+    position: absolute;
+    bottom: -1.5em;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.reveal #footer-right {
+    position: absolute;
+    right: 6%;
+    z-index:3;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 0.1em;
+}
+.reveal #footer-left {
+    position: absolute;
+    left: 6%;
+    z-index: 3;
+    color: #fff!important;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 0.1em;
+}
+.reveal #footer-right p,
+.reveal #footer-left p{
+    color: #fff;
+    font-size: 0.6em;
+    margin: 1em;
+}
+
+.backgrounds.first-slide  #footer{
+    display: none!important;
+}
+.reveal .slides{
+    position: relative!important;
+    box-sizing:border-box;
+    /*background:blue;*/
+}
+
+.reveal.first-slide  #left-col {
+    background: url('side_blue_pattern.svg') fixed repeat-y left center;
+    background-size: contain;
+    text-align: left;
+    padding: 10% 5% 0 5%;
+    box-sizing: border-box;
+    z-index: 4;
+    height: 100vh;
+
+
+
+}
+/*.reveal.first-slide .slides {*/
+/**/
+/*}*/
+
+.reveal.first-slide .slides section[data-markdown] {
+    box-sizing:border-box;
+    padding:0;
+}
+.reveal .slides > section {
+    margin: 0 auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+
+
+
+
+#WrapInner{
+    display:block;
+    -webkit-box-sizing: border-box /* Safari/Chrome, other WebKit */;
+    -moz-box-sizing: border-box /* Firefox, other Gecko */;
+    box-sizing: border-box;
+    padding: 20px 0;
+
+}
+
+
+
+
+.reveal ul li {
+    line-height:1.5;
+}
+
+
+.reveal .slide-background.present {
+    height: 95vh;
+}
+
+.listing{
+    background:#2841f9 url('pattern.svg') fixed repeat left center;
+}
+.listing a {
+    text-decoration: none;
+    color:#333333;
+
+}
+.listing a:hover{
+    text-decoration: none;
+    color:#2841f9;
+}
+.listing .list-container{
+    background: url('pattern.svg') fixed repeat left center;
+    padding: 20px 10px;
+    background: #fff;
+    position: relative;
+    border: 1px solid #e7e7e8;
+    -webkit-box-shadow: 0px 0px 70px 0px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 0px 70px 0px rgba(0,0,0,0.15);
+    box-shadow: 0px 0px 70px 0px rgba(0,0,0,0.15);
+    max-width: 33%;
+}
+
+.list {
+    list-style-type: none;
+    position: relative;
+    border-left: 1px dashed #1DD5B2;
+    padding-left: 30px;
+    margin-left: 30px;
+}
+
+.listing a:before {
+    content: "";
+    display: block;
+    width: 9px;
+    height: 9px;
+    position: absolute;
+    left: -8px;
+    background: #fff;
+    border: 2px solid #1DD5B2;
+    transition: all 0.3s;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    z-index: 9;
+    margin-top: 5px;
+}
+.listing a:hover:before {
+    background: #1DD5B2;
+}
+
+/*.logo-image {*/
+/*background:*/
+/*}*/
+.reveal .logo-image {
+    position: absolute; bottom: 3%;
+}
+.reveal .logo {
+    margin: 5% 0;
+    max-width: 95%;
+}
+
+
+
+
+@-moz-document url-prefix() {
+    .reveal.first-slide #left-col {
+        background-size: cover;
+    }
+    .reveal #footer {
+
+        height: 300px;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+}
 

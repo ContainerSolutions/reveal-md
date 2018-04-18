@@ -179,8 +179,8 @@ ul, ol, div, p {
 }
 
 .reveal .slides .pdf-page {
-    background: url('../../css/theme/slide-background.svg') no-repeat bottom center;
-    background-size: cover;
+    background: url('../../css/theme/footer_pattern.svg') no-repeat bottom center;
+    background-size: 100% auto;
 }
 .reveal > .backgrounds {
     background: #fff;
@@ -195,6 +195,13 @@ ul, ol, div, p {
 /*********************************************
  * FOOTER
  *********************************************/
+.reveal #footer {
+    position: absolute;
+    bottom: 0;
+    background: url('../../css/theme/footer_blue_pattern_logo.svg') no-repeat bottom center;
+    background-size: 100% auto;
+    font-size: 1.8em;
+}
 .reveal #footer-right {
     position: absolute;
     bottom: 1.3%;
@@ -228,4 +235,17 @@ ul, ol, div, p {
 .backgrounds.first-slide  #footer-left,
 .backgrounds.first-slide  #footer-right{
     display: block!important;
+}
+
+.reveal .slide-background.present {
+    height: 100%;
+}
+#WrapInner {
+    padding:0;
+}
+.reveal img,
+.reveal video,
+.reveal iframe {
+    max-width:75% ;
+    max-height:75%;
 }
