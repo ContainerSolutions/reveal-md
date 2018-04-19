@@ -26,14 +26,6 @@ reveal-md --css resources/cs.css slides.md
 
 ---
 
-You can use the the test slides to get an idea for the formatting.
-
-```
-docker run -d -p 8000:1948 containersol/reveal-md demo
-```
-
----
-
 If you need to include other files e.g. images, keep them with the presentation file and just mount the directory e.g:
 
 ```
