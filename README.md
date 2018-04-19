@@ -48,3 +48,37 @@ To build your own version just clone https://github.com/webpro/reveal-md and mod
 
 Now go to http://localhost:8000 in your browser.
 
+
+#New Options 
+
+####To show the text on left column add:
+
+showLeftCol: 'true' 
+
+####To edit left column on first slide you can add  the following options in your md file:
+
+subtitle: your subtitle   
+authors: yourname  
+date: date  
+twitter: '@twitter'  
+email: 'email@email.com'  
+job-title: Developer  
+ 
+
+####To remove the styling of the first page and have all slides just with footer :
+
+hideFirstStyle: 'true'  
+
+####For having text in the footer of the slides add :
+
+showFooterText : 'true'  
+
+####For editing the footer text use :
+
+email: 'email@email.com'    
+title: your slides title  
+twitter: '@twitter'  
+  **the website url is hardcoded*  
+
+
+####For exporting as pdf or printing the slides add ?print-pdf after the url like so (http://localhost:8000/slide.md?print-pdf) and use the print option - save as pdf of your browser

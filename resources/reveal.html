@@ -26,12 +26,21 @@
         link.href = window.location.search.match(/print-pdf/gi) ? '{{base}}/css/print/pdf.css' : '{{base}}/css/print/paper.css';
         document.getElementsByTagName('head')[0].appendChild(link);
     </script>
+    <script>
+        window.onload = function(){
+
+            document.getElementById("loading").style.display = "none";
+            document.getElementsByClassName('reveal')[0].style.visibility="visible";
+        }
+    </script>
 </head>
 <body>
+<div id="loading">
+    <img id="loading-image" src="{{base}}/css/theme/loading.gif"/>
+    <p>Loading...</p>
+</div>
 
-<div class="reveal">
-
-
+<div class="reveal" style="visibility: hidden">
     <div class="slides">
         <div id="left-col" class="col-left">
             <div id="left-inner" style="display: none;">
@@ -44,12 +53,9 @@
             </div>
             <div class="logo-image">
                 <img src="{{base}}/css/theme/logo.svg" class="logo"/>
-                <h4>info@container-solutions.com</h4>
-                <h4>www.container-solutions.com</h4>
             </div>
         </div>
         {{{slides}}}
-        <!--<div id="footer-container"><div id="footer"></div></div>-->
 
     </div>
 </div>
@@ -115,7 +121,6 @@
 
     // options from URL query string
     var queryOptions = Reveal.getQueryHash() || {};
-
     var options = {{{revealOptionsStr}}};
     var showTitlePage = '{{{showLeftCol}}}' == 'true';
     var showFooterText = '{{{showFooterText}}}' == 'true';
@@ -129,14 +134,18 @@
 
 <script>
 
-    //initializing function
+    //initializing functions
+
     Reveal.initialize(options);
     Reveal.addEventListener('ready', function () {
         toggleFirstSlide(Reveal.isFirstSlide());
 
+        checkElement('#WrapInner')
+            .then(function () {
+                checkElement('.present')
+                    .then(zoomOut);
+            });
 
-        checkElement('.present') //use whichever selector you want
-            .then(zoomOut);
         if (window.location.search.match(/print-pdf/gi)) {
             Reveal.addEventListener('ready', function (event) {
                 document.getElementsByClassName('slide-background').innerHTML += footer;
@@ -149,10 +158,13 @@
     Reveal.addEventListener('slidechanged', function () {
         toggleFirstSlide(Reveal.isFirstSlide());
 
-        checkElement('.present') //use whichever selector you want
-            .then(zoomOut);
-
+        checkElement('#WrapInner')
+            .then(function () {
+                checkElement('.present')
+                    .then(zoomOut);
+            });
     });
+
     Reveal.addEventListener('ready', function () {
         var sectionContents = document.querySelectorAll('[data-markdown]');
 
@@ -169,13 +181,17 @@
                 for (var i = 0; i < printFooter.length; i++) {
                     printFooter[i].appendChild(createFooter());
                 }
+                if (showFooterText) {
+                    document.getElementById('footer-left').style.display = "flex";
+                    document.getElementById('footer-right').style.display = "flex";
+                }
             });
         }
         else {
             var footer = createFooter();
             document.querySelector('div.slides').appendChild(footer);
         }
-
+    // end initializing functions
 
     //async function
     function rafAsync() {
@@ -193,11 +209,12 @@
             return Promise.resolve(true);
         }
     }
-
+    //end async function
+    //set width of the device
     var windowWidth = window.innerWidth
         || document.documentElement.clientWidth
         || document.body.clientWidth;
-
+    // get the zoom scale
     function getZoom() {
         var parentElement = document.getElementsByClassName('slides')[0];
         var scale = window.getComputedStyle(document.getElementsByClassName('slides')[0]).zoom;
@@ -220,12 +237,14 @@
         return {parentElement, scale, zoomEffect, zoomEffect};
     }
 
+    // check of its first slide and toggle
     function toggleFirstSlide(isFirstSlide) {
         function rafAsync() {
             return new Promise(function (resolve) {
                 requestAnimationFrame(resolve); //faster than set time out
             });
         }
+        //check everytime if the element exists
 
         function checkElement(selector) {
             if (document.querySelector(selector) === null) {
@@ -236,8 +255,8 @@
                 return Promise.resolve(true);
             }
         }
-        //
-        checkElement('#footer') //use whichever selector you want
+        //check if footer exists
+        checkElement('#footer')
             .then(function () {
 
                 if(showFooterText) {
@@ -245,76 +264,105 @@
                     document.getElementById('footer-right').style.display="flex";
                 }
 
+
             });
-        checkElement('.first-slide') //use whichever selector you want
+        //check if it has first-slide class
+        checkElement('.first-slide')
             .then(function () {
                 if (showTitlePage) {
                     document.getElementById('left-inner').style.display = "block";
                 }
             });
-
+            //call the zoom function
             var {parentElement, scale, zoomEffect, zoomEffect} = getZoom();
+
+
+
+        <!--    functions on the first slide vs on the other slides   -->
+
+        //check if this is the first slide
             if (isFirstSlide) {
                 document.getElementById('left-col').style.display = "block";
                 document.getElementsByClassName('slides')[0].classList.add('firstOfSlides');
-                checkElement('.first-slide') //use whichever selector you want
+                checkElement('.first-slide')
                     .then(function () {
                         if (window.location.search.match(/print-pdf/gi)) {
-                            document.getElementById('footer').style.display='block';
+                            document.getElementById('footer').style.display='flex';
+                            if(showFooterText) {
+                                document.getElementById('footer-left').style.display="flex";
+                                document.getElementById('footer-right').style.display="flex";}
                         }else{
                             document.getElementById('footer').style.display='none';
                         }
 
                         var middleSection = Math.ceil(document.getElementsByClassName('slides')[0].clientWidth * zoomEffect);
+
+                        //check window width and height
                         var windowWidth = window.innerWidth
                             || document.documentElement.clientWidth
                             || document.body.clientWidth;
+                        var windowHeight = window.innerHeight
+                            || document.documentElement.clientHeight
+                            || document.body.clientHeight;
+                        //set the width of the left-col accordingly to the space remaining from window - section
                         document.getElementById('left-col').style.width = Math.ceil((windowWidth - middleSection) / zoomEffect) + 'px';
 
+                        //attribute that to a variable
                         var colLeftWidth = document.getElementById('left-col').clientWidth;
-                        if (scale === window.getComputedStyle(document.getElementsByClassName('slides')[0]).zoom) {
+
+                        //check if its firefox browser and calculate the margin-left of the section
+                        var isFF = !!navigator.userAgent.match(/firefox/i);
+                        if(isFF){
+                            parentElement.style.marginLeft =(windowWidth - (parentElement.clientWidth *zoomEffect))/2 + "px";
+                            document.getElementById('left-col').style.marginTop ="-" +(windowHeight - (parentElement.clientHeight *zoomEffect))/2 + "px";
+                        } else {
                             parentElement.style.marginLeft = colLeftWidth + 'px';
-                            console.log('parent margin left: ' + parentElement.style.marginLeft);
                         }
+
+                        // get the margin-left of the left column
                         document.getElementById('left-col').style.marginLeft = '-' + Math.ceil((windowWidth - middleSection) / zoomEffect) + 'px';
-                        console.log(true);
-                        console.log('zoom: ' + zoomEffect);
-                        console.log("left column width: " + colLeftWidth);
-                        console.log('margin left of column:' + ('-' + Math.ceil(windowWidth - middleSection) + 'px'));
-                        console.log("middle slide width:" + middleSection);
-                        console.log("middle slide width:" + windowWidth);
                     });
 
 
             } else {
+                //if its not first slide revert styles to centered normal
                 document.getElementById('footer').style.display='block';
                 document.getElementById('left-col').style.display = "none";
                 document.getElementById('left-col').style.width = "0";
                 document.getElementById('left-col').style.marginLeft = "0";
-                var parentElement = document.getElementsByClassName('slides')[0];
                 parentElement.style.marginLeft = "auto";
 
-                var fillLeftWidth = document.getElementsByClassName('slides')[0].offsetLeft;
-
-                document.getElementById('footer').style.width = (windowWidth / zoomEffect) + 'px';
-                document.getElementById('footer').style.marginLeft = "-" + fillLeftWidth + 'px';
-
-                checkElement('.first-slide') //use whichever selector you want
+                var parentElement = document.getElementsByClassName('slides')[0];
+                checkElement('.first-slide')
                     .then(function () {
-
                         document.getElementsByClassName('slides')[0].classList.remove('firstOfSlides');
-                        var parentElement = document.getElementsByClassName('slides')[0];
-                        parentElement.style.marginLeft = 'auto';
                         console.log(checkElement('.firstOfSlides'));
 
                     });
+
+
+
+
+
+
+                //set the footer width to the window width
+                document.getElementById('footer').style.width = (windowWidth / zoomEffect) + 'px';
+                //calculate how much the margin-left is
+                var offsetRight = (windowWidth - (parentElement.clientWidth * zoomEffect))/2;
+                //pull the footer to the point left 0 of the window
+                document.getElementById('footer').style.marginLeft= "-" + (offsetRight/zoomEffect) + "px";
+                if (window.location.search.match(/print-pdf/gi)) {
+                    document.getElementById('footer').style.display='flex';
+                    if(showFooterText) {
+                        document.getElementById('footer-left').style.display="flex";
+                        document.getElementById('footer-right').style.display="flex";}
+                }
+
             }
-
-
+            //toggle classes on options to hide or show first slide styling
             if (isFirstSlide) {
                 document.getElementsByClassName('reveal')[0].classList.add('first-slide');
                 document.getElementsByClassName('backgrounds')[0].classList.add('first-slide');
-
 
                 if (hideFirstStyle) {
                     document.getElementsByClassName('reveal')[0].classList.remove('first-slide');
@@ -323,7 +371,6 @@
                 if (window.location.search.match(/print-pdf/gi)) {
                     document.getElementById('left-col').style.display = "none";
                 }
-
 
             } else {
                 document.getElementsByClassName('reveal')[0].classList.remove('first-slide');
@@ -334,77 +381,78 @@
 
     }
 
-
     <!--     Left column  -->
 
-
     <!--    Footer    -->
-
-
-    // function createFooter() {
-    //     var footer = document.getElementById('footer');
-    //     footer.innerHTML =
-    //         '        <div id="footer-left"> <p>container-solutions.com</p><p>{{email}}</p></div>\n' +
-    //         '        <div id="footer-right"> <p class="title">{{title}}</p> <p>{{{twitter}}}</p></div>\n' ;
-    //     return footer;
-    // }
-    <!--   / Footer    -->
-
+    //create the footer and implement it in the section to be scaled as well depending on the screen-size
     function createFooter() {
         var footer = document.createElement('div');
         footer.className = 'hidden';
-        footer.innerHTML =
-            '<div id="footer">\n' +
-            '<div id="footer-left" style="display:none"><p>container-solutions.com</p><p>{{email}}</p></div>\n' +
-            '<div id="footer-right" style="display:none"><p class="title">{{title}}</p> <p>{{{twitter}}}</p></div>\n' +
-            '</div>';
+
+        //always display for print screen if the option is checked
+
+        if (window.location.search.match(/print-pdf/gi)) {
+            if (showFooterText) {
+                footer.innerHTML =
+                    '<div id="footer">\n' +
+                    '<div id="footer-left" style="display: flex;"><p>container-solutions.com</p><p>{{email}}</p></div>\n' +
+                    '<div id="footer-right" style="display: flex;"><p class="title">{{title}}</p> <p>{{{twitter}}}</p></div>\n' +
+                    '</div>';
+            } else {
+                footer.innerHTML =
+                    '<div id="footer">\n' +
+                    '<div id="footer-left" style="display: none;"><p>container-solutions.com</p><p>{{email}}</p></div>\n' +
+                    '<div id="footer-right" style="display: none;"><p class="title">{{title}}</p> <p>{{{twitter}}}</p></div>\n' +
+                    '</div>';
+            }
+        } else {
+            footer.innerHTML =
+                '<div id="footer">\n' +
+                '<div id="footer-left" style="display: none;"><p>container-solutions.com</p><p>{{email}}</p></div>\n' +
+                '<div id="footer-right" style="display: none;"><p class="title">{{title}}</p> <p>{{{twitter}}}</p></div>\n' +
+                '</div>';
+        }
         return footer;
     }
     <!--   / Footer    -->
 
+    <!--    Scaling down    -->
+
+    //make content fit the window height(scale down) so it doesn't overflow on the bottom
     function zoomOut() {
 
         var childSizing = document.querySelectorAll('.present[data-markdown] #WrapInner')[0];
         if (childSizing === null) {
             return;
         }
+        //get the height of the inner content
         var refHeight = childSizing.clientHeight;
         var refWidth = childSizing.clientWidth;
-        console.log(refHeight + ' height and width ' + refWidth);
-
-        var footer = document.getElementById('footer');
-        var footerHeight = footer.clientHeight;
-
+        //and of the parent
         var parentSizing = document.getElementsByClassName('slides')[0];
-        var parentHeight = parentSizing.clientHeight - footerHeight;
+        var parentHeight = parentSizing.clientHeight;
         var parentWidth = parentSizing.clientWidth;
 
-
+        //calculate how much it should be scaled down
         var scale = Math.min(
             parentWidth / refWidth,
             parentHeight / refHeight
         );
 
-
+        //calculate how much it should be dragged upwards after scaling down
         var translateY = Math.min((parentHeight - refHeight) / 2);
+        //check if then content height is bigger than the window height and scale it
+
         if (parentHeight < refHeight) {
             if (window.location.search.match(/print-pdf/gi)) {
                 childSizing.style.transform = "unset";
             }
             else {
+                //besides scaling down drag it up as well so its at the top of the window
                 childSizing.style.transform = "translateY(" + translateY + "px) scale(" + scale + ")";
-                console.log('it is bigger man')
-
             }
         }
 
-    }
-
-    //target firefox
-
-
-    if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
-        // Do Firefox-related activities
     }
 
 

@@ -207,7 +207,6 @@ ul, ol, div, p {
     bottom: 1.3%;
     right: 3%;
     z-index:3;
-    display: flex;
     justify-content: space-around;
     align-items: center;
 }
@@ -217,7 +216,6 @@ ul, ol, div, p {
     left: 3%;
     z-index: 3;
     color: #fff!important;
-    display: flex;
     justify-content: space-around;
     align-items: center;
 }
@@ -227,15 +225,14 @@ ul, ol, div, p {
     color: #fff;
     font-size: 0.3em;
     margin: 10px;
-    display: inline-block;
 }
 
-.reveal.first-slide  #footer-right,
-.reveal.first-slide #footer-left,
-.backgrounds.first-slide  #footer-left,
-.backgrounds.first-slide  #footer-right{
-    display: block!important;
-}
+/*.reveal.first-slide  #footer-right,*/
+/*.reveal.first-slide #footer-left,*/
+/*.backgrounds.first-slide  #footer-left,*/
+/*.backgrounds.first-slide  #footer-right{*/
+    /*display: block!important;*/
+/*}*/
 
 .reveal .slide-background.present {
     height: 100%;
@@ -248,4 +245,10 @@ ul, ol, div, p {
 .reveal iframe {
     max-width:75% ;
     max-height:75%;
+}
+@-moz-document url-prefix() {
+
+    .reveal .slides #footer {
+        bottom: 0;
+    }
 }

@@ -1,9 +1,10 @@
 ---
 title: Title of the talk
-hideFirstSlide: true
-subtitle: subtitle
-authors: Loredana & Maarten
-email: "maarten@moretea.nl"
+
+subtitle: This is a very long subtitle
+authors: This is the clever author
+email: "heythisisanemail@container-solutions.com"
+job-title: Job position important
 ---
 
 # Bio
