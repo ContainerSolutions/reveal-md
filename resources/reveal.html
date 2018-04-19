@@ -214,6 +214,9 @@
     var windowWidth = window.innerWidth
         || document.documentElement.clientWidth
         || document.body.clientWidth;
+    var windowHeight = window.innerHeight
+        || document.documentElement.clientHeight
+        || document.body.clientHeight;
     // get the zoom scale
     function getZoom() {
         var parentElement = document.getElementsByClassName('slides')[0];
@@ -279,7 +282,6 @@
 
 
         <!--    functions on the first slide vs on the other slides   -->
-
         //check if this is the first slide
             if (isFirstSlide) {
                 document.getElementById('left-col').style.display = "block";
@@ -420,27 +422,39 @@
 
     //make content fit the window height(scale down) so it doesn't overflow on the bottom
     function zoomOut() {
+        var {parentElement, scale, zoomEffect, zoomEffect} = getZoom();
 
         var childSizing = document.querySelectorAll('.present[data-markdown] #WrapInner')[0];
         if (childSizing === null) {
             return;
         }
         //get the height of the inner content
-        var refHeight = childSizing.clientHeight;
+        var footer = document.getElementById('footer');
+        var footerHeight = footer.clientHeight;
+        var refHeight = childSizing.clientHeight + (footerHeight / zoomEffect);
         var refWidth = childSizing.clientWidth;
+
+        console.log(refHeight + ' height and width ' + refWidth);
+
+        //call the zoom function
+
+
+
         //and of the parent
         var parentSizing = document.getElementsByClassName('slides')[0];
         var parentHeight = parentSizing.clientHeight;
+        // var parentHeight = parentSizing.clientHeight - footerHeight;
+
         var parentWidth = parentSizing.clientWidth;
 
         //calculate how much it should be scaled down
-        var scale = Math.min(
+        var scaleDown = Math.min(
             parentWidth / refWidth,
             parentHeight / refHeight
         );
 
         //calculate how much it should be dragged upwards after scaling down
-        var translateY = Math.min((parentHeight - refHeight) / 2);
+        var translateY = Math.min((parentHeight - refHeight)/2);
         //check if then content height is bigger than the window height and scale it
 
         if (parentHeight < refHeight) {
@@ -449,7 +463,7 @@
             }
             else {
                 //besides scaling down drag it up as well so its at the top of the window
-                childSizing.style.transform = "translateY(" + translateY + "px) scale(" + scale + ")";
+                childSizing.style.transform = "translateY(" + translateY + "px) scale(" + scaleDown + ")";
             }
         }
 
