@@ -88,7 +88,7 @@ ul, ol, div, p {
     overflow: hidden;
     z-index: 1;
     /*border:2px solid darkgreen;*/
-
+    max-height: 727px;
     page-break-after: always;
 }
 
@@ -227,12 +227,6 @@ ul, ol, div, p {
     margin: 10px;
 }
 
-/*.reveal.first-slide  #footer-right,*/
-/*.reveal.first-slide #footer-left,*/
-/*.backgrounds.first-slide  #footer-left,*/
-/*.backgrounds.first-slide  #footer-right{*/
-    /*display: block!important;*/
-/*}*/
 
 .reveal .slide-background.present {
     height: 100%;
@@ -251,4 +245,8 @@ ul, ol, div, p {
     .reveal .slides #footer {
         bottom: 0;
     }
+}
+
+.reveal .col-left .logo-image{
+    display:none!important;
 }

@@ -43,16 +43,18 @@
 <div class="reveal" style="visibility: hidden">
     <div class="slides">
         <div id="left-col" class="col-left">
+            <div id="left-content">
             <div id="left-inner" style="display: none;">
             <h2>{{subtitle}}</h2>
-            <h4>{{date}}</h4>
             <h3>{{authors}}</h3>
             <h4>{{job-title}}</h4>
-            <p>{{email}}</p>
+            <h4>{{email}}</h4>
             <h4>{{twitter}}</h4>
+            <h4>{{date}}</h4>
             </div>
             <div class="logo-image">
                 <img src="{{base}}/css/theme/logo.svg" class="logo"/>
+            </div>
             </div>
         </div>
         {{{slides}}}
@@ -148,6 +150,7 @@
 
         if (window.location.search.match(/print-pdf/gi)) {
             Reveal.addEventListener('ready', function (event) {
+                document.getElementById('left-col').style.display="none";
                 document.getElementsByClassName('slide-background').innerHTML += footer;
             });
         }
@@ -177,6 +180,7 @@
 
         if (window.location.search.match(/print-pdf/gi)) {
             Reveal.addEventListener('ready', function (event) {
+                document.getElementsByClassName("backgrounds")[0].style.background="white";
                 var printFooter = document.querySelectorAll('.slide-background');
                 for (var i = 0; i < printFooter.length; i++) {
                     printFooter[i].appendChild(createFooter());
@@ -185,6 +189,10 @@
                     document.getElementById('footer-left').style.display = "flex";
                     document.getElementById('footer-right').style.display = "flex";
                 }
+
+                        document.getElementById('left-col').style.display="none";
+                document.getElementById('footer').style.display="none";
+
             });
         }
         else {
@@ -285,11 +293,13 @@
         //check if this is the first slide
             if (isFirstSlide) {
                 document.getElementById('left-col').style.display = "block";
+
                 document.getElementsByClassName('slides')[0].classList.add('firstOfSlides');
                 checkElement('.first-slide')
                     .then(function () {
                         if (window.location.search.match(/print-pdf/gi)) {
-                            document.getElementById('footer').style.display='flex';
+                            document.getElementById('footer').style.display='none';
+                            document.getElementById('left-col').style.display = "none";
                             if(showFooterText) {
                                 document.getElementById('footer-left').style.display="flex";
                                 document.getElementById('footer-right').style.display="flex";}
@@ -324,7 +334,15 @@
                         // get the margin-left of the left column
                         document.getElementById('left-col').style.marginLeft = '-' + Math.ceil((windowWidth - middleSection) / zoomEffect) + 'px';
                     });
-
+                //set the footer width to the window width
+                checkElement('#footer')
+                    .then(function () {
+                        document.getElementById('footer').style.width = (windowWidth / zoomEffect) + 'px';
+                    });
+                //calculate how much the margin-left is
+                var offsetRight = (windowWidth - (parentElement.clientWidth * zoomEffect))/2;
+                //pull the footer to the point left 0 of the window
+                document.getElementById('footer').style.marginLeft= "-" + (offsetRight/zoomEffect) + "px";
 
             } else {
                 //if its not first slide revert styles to centered normal
@@ -339,13 +357,7 @@
                     .then(function () {
                         document.getElementsByClassName('slides')[0].classList.remove('firstOfSlides');
                         console.log(checkElement('.firstOfSlides'));
-
                     });
-
-
-
-
-
 
                 //set the footer width to the window width
                 document.getElementById('footer').style.width = (windowWidth / zoomEffect) + 'px';
@@ -369,9 +381,12 @@
                 if (hideFirstStyle) {
                     document.getElementsByClassName('reveal')[0].classList.remove('first-slide');
                     document.getElementsByClassName('backgrounds')[0].classList.remove('first-slide');
+                    document.getElementById('left-content').style.display = "none";
+
                 }
                 if (window.location.search.match(/print-pdf/gi)) {
                     document.getElementById('left-col').style.display = "none";
+                    document.getElementById('left-content').style.display = "none";
                 }
 
             } else {
@@ -396,13 +411,13 @@
         if (window.location.search.match(/print-pdf/gi)) {
             if (showFooterText) {
                 footer.innerHTML =
-                    '<div id="footer">\n' +
+                    '<div id="footer" class="printFooter">\n' +
                     '<div id="footer-left" style="display: flex;"><p>container-solutions.com</p><p>{{email}}</p></div>\n' +
                     '<div id="footer-right" style="display: flex;"><p class="title">{{title}}</p> <p>{{{twitter}}}</p></div>\n' +
                     '</div>';
             } else {
                 footer.innerHTML =
-                    '<div id="footer">\n' +
+                    '<div id="footer" class="printFooter">\n' +
                     '<div id="footer-left" style="display: none;"><p>container-solutions.com</p><p>{{email}}</p></div>\n' +
                     '<div id="footer-right" style="display: none;"><p class="title">{{title}}</p> <p>{{{twitter}}}</p></div>\n' +
                     '</div>';
