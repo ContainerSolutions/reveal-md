@@ -1,10 +1,14 @@
 ---
-title: Title of the talk
-
-subtitle: This is a very long subtitle
-authors: This is the clever author
-email: "heythisisanemail@container-solutions.com"
-job-title: Job position important
+showLeftCol: 'true'
+hideFirstStyle: 'false'
+showFooterText : 'true'
+email: 'your-email@container-solutions.com'
+title: Demo Slide
+subtitle: This is demo slide
+authors: your name
+date: 20/04/2018
+twitter: '@twitter'
+job-title: Software Engineer
 ---
 
 # Bio
