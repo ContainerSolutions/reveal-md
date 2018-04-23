@@ -150,13 +150,19 @@ body {
 }
 
 .reveal h4 {
-    font-size: 1em;
+    font-size: 1.1em;
 }
 
 
 .reveal h1 {
     text-shadow: none;
 }
+
+.reveal li,
+.reveal p {
+    font-size: 1em;
+}
+
 
 /*********************************************
  * OTHER
