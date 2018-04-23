@@ -157,7 +157,7 @@ body {
 }
 
 .reveal p {
-    font-size: 1.2em;
+    font-size: 30px;
 }
 
 /*********************************************
@@ -259,7 +259,7 @@ body {
     text-align: left;
     font-size: 0.55rem;
     font-family: monospace;
-    line-height: 1.2em;
+    line-height: 30px;
     word-wrap: break-word;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
 }
@@ -274,7 +274,7 @@ body {
     max-height: 400px;
     word-wrap: normal;
     overflow: auto;
-    font-size: 2.3em;
+    font-size: 30px;
     line-height: 1;
 }
 
@@ -526,13 +526,17 @@ body {
     -moz-box-sizing: border-box /* Firefox, other Gecko */;
     box-sizing: border-box;
     padding: 0 0 10px 0;
-    font-size: 1.2em
+    font-size: 30px;
 
+}
+.reveal ul {
+    font-size: 30px;
 }
 
 .reveal ul li {
     line-height: 1.5;
-    font-size: 1.2em;
+    font-size:
+
 }
 
 .listing {
