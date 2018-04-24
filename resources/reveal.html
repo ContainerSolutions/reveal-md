@@ -356,7 +356,6 @@
                 checkElement('.first-slide')
                     .then(function () {
                         document.getElementsByClassName('slides')[0].classList.remove('firstOfSlides');
-                        console.log(checkElement('.firstOfSlides'));
                     });
 
                 //set the footer width to the window width
@@ -449,7 +448,6 @@
         var refHeight = childSizing.clientHeight + (footerHeight / zoomEffect);
         var refWidth = childSizing.clientWidth;
 
-        console.log(refHeight + ' height and width ' + refWidth);
 
         //call the zoom function
 
