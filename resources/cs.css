@@ -449,7 +449,7 @@ body {
 .reveal #footer.printFooter {
     background: url('footer_blue_pattern_logo.svg') no-repeat bottom center;
     background-size: cover;
-    height: 2.6em;
+    height: 2.1em;
     position: absolute;
     bottom: 0;
 }
@@ -683,4 +683,17 @@ body {
 
 .reveal .pdf-page .slide-background.present {
     height: 100%;
+}
+
+.pdf-page .footer{
+    padding-top: 2px;
+}
+
+.pdf-page #footer-right {
+    right: 2%;
+}
+
+.pdf-page #footer-left {
+    left: 2%;
+
 }

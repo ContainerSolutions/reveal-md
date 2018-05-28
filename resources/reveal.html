@@ -175,6 +175,7 @@
         if (window.location.search.match(/print-pdf/gi)) {
             Reveal.addEventListener('ready', function (event) {
                 document.getElementsByClassName("backgrounds")[0].style.background="white";
+
                 var printFooter = document.querySelectorAll('.slide-background');
                 for (var i = 0; i < printFooter.length; i++) {
                     printFooter[i].appendChild(createFooter());
@@ -292,7 +293,8 @@
                 checkElement('.first-slide')
                     .then(function () {
                         if (window.location.search.match(/print-pdf/gi)) {
-                            document.getElementById('footer').style.display='none';
+                            document.getElementById('footer').style.display='block';
+                            document.getElementById('footer').style.maxWidth='100%';
                             document.getElementById('left-col').style.display = "none";
                             if(showFooterText) {
                                 document.getElementById('footer-left').style.display="flex";
@@ -361,6 +363,7 @@
                 document.getElementById('footer').style.marginLeft= "-" + (offsetRight/zoomEffect) + "px";
                 if (window.location.search.match(/print-pdf/gi)) {
                     document.getElementById('footer').style.display='flex';
+                    document.getElementById('footer').style.width='100%';
                     if(showFooterText) {
                         document.getElementById('footer-left').style.display="flex";
                         document.getElementById('footer-right').style.display="flex";}
@@ -405,7 +408,7 @@
         if (window.location.search.match(/print-pdf/gi)) {
             if (showFooterText) {
                 footer.innerHTML =
-                    '<div id="footer" class="printFooter">\n' +
+                    '<div id="footer" class="printFooter" style="width: 100%">\n' +
                     '<div id="footer-left" style="display: flex;"><p>container-solutions.com</p><p>{{email}}</p></div>\n' +
                     '<div id="footer-right" style="display: flex;"><p class="title">{{title}}</p> <p>{{{twitter}}}</p></div>\n' +
                     '</div>';
