@@ -145,6 +145,7 @@
             Reveal.addEventListener('ready', function (event) {
                 document.getElementById('left-col').style.display="none";
                 document.getElementsByClassName('slide-background').innerHTML += footer;
+
             });
         }
         else {
@@ -331,11 +332,12 @@
                 checkElement('#footer')
                     .then(function () {
                         document.getElementById('footer').style.width = (windowWidth / zoomEffect) + 'px';
+                        //calculate how much the margin-left is
+                        var offsetRight = (windowWidth - (parentElement.clientWidth * zoomEffect))/2;
+                        //pull the footer to the point left 0 of the window
+                        document.getElementById('footer').style.marginLeft= "-" + (offsetRight/zoomEffect) + "px";
                     });
-                //calculate how much the margin-left is
-                var offsetRight = (windowWidth - (parentElement.clientWidth * zoomEffect))/2;
-                //pull the footer to the point left 0 of the window
-                document.getElementById('footer').style.marginLeft= "-" + (offsetRight/zoomEffect) + "px";
+
 
             } else {
                 //if its not first slide revert styles to centered normal

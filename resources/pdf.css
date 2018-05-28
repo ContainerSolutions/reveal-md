@@ -250,3 +250,11 @@ ul, ol, div, p {
 .reveal .col-left .logo-image{
     display:none!important;
 }
+.reveal #footer-right {
+    right: 2%;
+}
+
+.reveal #footer-left {
+    left: 2%;
+
+}
